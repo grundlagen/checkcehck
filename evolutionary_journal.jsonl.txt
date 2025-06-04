@@ -1,0 +1,60 @@
+{"ts": "2025-06-02 09:48:04", "event": "loader_fail", "loader": "coqui_xtts_v2", "err": "Xtts.load_checkpoint() got an unexpected keyword argument 'weights_only'"}
+{"ts": "2025-06-02 09:48:04", "event": "loader_fail", "loader": "coqui_xtts_v1", "err": "[Errno 2] No such file or directory: 'C:\\\\xtts_model_v1\\\\config.json'"}
+{"ts": "2025-06-02 09:48:04", "event": "loader_fail", "loader": "silero", "err": "No module named 'silero'"}
+{"ts": "2025-06-02 09:53:13", "event": "loader_fail", "loader": "coqui_xtts_v2", "err": "Xtts.load_checkpoint() got an unexpected keyword argument 'cfg'"}
+{"ts": "2025-06-02 09:53:13", "event": "loader_fail", "loader": "coqui_xtts_v1", "err": "C:\\xtts_model_v1\\config.json"}
+{"ts": "2025-06-02 09:53:44", "event": "loader_fail", "loader": "silero", "err": "No module named 'silero'"}
+{"ts": "2025-06-02 09:54:38", "event": "loader_fail", "loader": "coqui_xtts_v2", "err": "Xtts.load_checkpoint() got an unexpected keyword argument 'cfg'"}
+{"ts": "2025-06-02 09:54:38", "event": "loader_fail", "loader": "coqui_xtts_v1", "err": "C:\\xtts_model_v1\\config.json"}
+{"ts": "2025-06-02 09:54:47", "event": "loader_fail", "loader": "silero", "err": "No module named 'silero'"}
+{"ts": "2025-06-02 09:58:33", "event": "loader_fail", "loader": "xtts_v2", "err": "Xtts.load_checkpoint() got an unexpected keyword argument 'cfg'", "trace": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled14.py\", line 99, in _load_coqui_xtts\n    model.load_checkpoint(**kwargs, weights_only=False)\nTypeError: Xtts.load_checkpoint() got an unexpected keyword argument 'cfg'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled14.py\", line 101, in _load_coqui_xtts\n    model.load_checkpoint(**kwargs)\nTypeError: Xtts.load_checkpoint() got an unexpected keyword argument 'cfg'\n"}
+{"ts": "2025-06-02 09:58:33", "event": "loader_fail", "loader": "xtts_v1", "err": "C:\\xtts_model_v1\\config.json", "trace": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled14.py\", line 117, in _load_coqui_xtts_v1\n    raise FileNotFoundError(cfg_path)\nFileNotFoundError: C:\\xtts_model_v1\\config.json\n"}
+{"ts": "2025-06-02 09:58:46", "event": "loader_fail", "loader": "silero", "err": "No module named 'silero-tts'", "trace": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled14.py\", line 136, in _load_silero\n    silero = ensure_package(\"silero-tts\")  # module name differs from pip wheel\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled14.py\", line 63, in ensure_package\n    return importlib.import_module(pkg)\n  File \"C:\\Users\\Lenovo\\anaconda3\\envs\\xtts_env\\lib\\importlib\\__init__.py\", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File \"<frozen importlib._bootstrap>\", line 1050, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1027, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1004, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'silero-tts'\n"}
+{"ts": "2025-06-02 10:10:29", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:11:42", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:12:55", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:14:10", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:15:26", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:16:42", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:17:55", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:19:07", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:20:21", "event": "loader_fail", "err": "[Errno 2] No such file or directory: 'xtts_v2\\\\config.json'"}
+{"ts": "2025-06-02 10:23:42", "event": "patch_empty", "iter": 0}
+{"ts": "2025-06-02 10:25:18", "event": "patch_empty", "iter": 1}
+{"ts": "2025-06-02 10:31:19", "event": "patch_fail", "iter": 0}
+{"ts": "2025-06-02 10:48:11", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 10:48:29", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 10:48:49", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:17:31", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:17:47", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:18:07", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:19:44", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:28:13", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 11:28:35", "event": "patch", "file": "patches\\iter_1.py"}
+{"ts": "2025-06-02 11:29:00", "event": "patch", "file": "patches\\iter_2.py"}
+{"ts": "2025-06-02 11:29:17", "event": "patch", "file": "patches\\iter_3.py"}
+{"ts": "2025-06-02 11:29:39", "event": "patch", "file": "patches\\iter_4.py"}
+{"ts": "2025-06-02 11:30:08", "event": "patch", "file": "patches\\iter_5.py"}
+{"ts": "2025-06-02 12:22:24", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 12:22:25", "event": "fail", "iter": 0, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 341, in <module>\n    exit_code = asyncio.run(main())\n  File \"C:\\Users\\Lenovo\\anaconda3\\envs\\xtts_env\\lib\\asyncio\\runners.py\", line 33, in run\n    raise RuntimeError(\nRuntimeError: asyncio.run() cannot be call"}
+{"ts": "2025-06-02 12:22:48", "event": "patch", "file": "patches\\iter_1.py"}
+{"ts": "2025-06-02 12:28:43", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 12:31:49", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 12:45:06", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 12:49:49", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 12:49:49", "event": "fail", "iter": 0, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 233, in extract\n    lat = self.model.get_conditioning_latents(audio, 22050)\nAttributeError: 'NoneType' object has no attribute 'get_conditioning_latents'\n"}
+{"ts": "2025-06-02 12:50:01", "event": "patch", "file": "patches\\iter_1.py"}
+{"ts": "2025-06-02 12:50:01", "event": "fail", "iter": 1, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 233, in extract\n    lat = self.model.get_conditioning_latents(audio, 22050)\nAttributeError: 'NoneType' object has no attribute 'get_conditioning_latents'\n"}
+{"ts": "2025-06-02 12:50:15", "event": "patch", "file": "patches\\iter_2.py"}
+{"ts": "2025-06-02 12:50:15", "event": "fail", "iter": 2, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 233, in extract\n    lat = self.model.get_conditioning_latents(audio, 22050)\nAttributeError: 'NoneType' object has no attribute 'get_conditioning_latents'\n"}
+{"ts": "2025-06-02 12:50:32", "event": "patch", "file": "patches\\iter_3.py"}
+{"ts": "2025-06-02 13:05:18", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 13:05:23", "event": "fail", "iter": 0, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 233, in extract\n    lat = self.model.get_conditioning_latents(audio, 22050)\nAttributeError: 'NoneType' object has no attribute 'get_conditioning_latents'\n"}
+{"ts": "2025-06-02 13:05:36", "event": "patch", "file": "patches\\iter_1.py"}
+{"ts": "2025-06-02 13:22:02", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 13:22:03", "event": "fail", "iter": 0, "err": "Traceback (most recent call last):\n  File \"c:\\users\\lenovo\\.spyder-py3\\untitled16.py\", line 210, in extract\n    lat = self.model.get_conditioning_latents(audio, 22050)\nAttributeError: 'NoneType' object has no attribute 'get_conditioning_latents'\n"}
+{"ts": "2025-06-02 13:22:16", "event": "patch", "file": "patches\\iter_1.py"}
+{"ts": "2025-06-02 13:35:45", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 13:37:36", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 13:37:54", "event": "patch", "file": "patches\\iter_0.py"}
+{"ts": "2025-06-02 13:39:40", "event": "patch", "file": "patches\\iter_0.py"}
