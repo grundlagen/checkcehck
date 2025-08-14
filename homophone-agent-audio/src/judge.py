@@ -31,6 +31,7 @@ from .embedding import semantic_similarity
 from .orchestrator import fluency_score
 from .cognate import is_cognateish
 from .phone_distance import PhoneDistance
+from .cort import cort_score
 
 
 def judge(
@@ -40,6 +41,7 @@ def judge(
     B_text: str,
     B_ipa: str,
     phone_dist: PhoneDistance,
+    compute_complexity: bool = False,
 ) -> Dict[str, float | str]:
     """
     Compute component scores and a rationale for a candidate translation.
@@ -51,6 +53,8 @@ def judge(
         B_text: The candidate homophonic translation text.
         B_ipa: The IPA for the candidate translation.
         phone_dist: A PhoneDistance instance for phonetic similarity.
+        compute_complexity: Whether to compute the optional CORT
+            complexity metric for ``B_text``.
 
     Returns:
         A dictionary with keys ``phonetic``, ``semantic``, ``fluency`` and
@@ -76,16 +80,23 @@ def judge(
     # Cap penalty at 0.3
     cog_pen = min(cog_pen, 0.3)
     flu_adj = max(0.0, flu - cog_pen)
+    # Optional complexity score
+    complexity = cort_score(B_text) if compute_complexity else 0.0
     # Construct rationale string
     rationale = (
         f"phonetic {phon:.3f}; semantic {sem:.3f}; fluency {flu_adj:.3f}"
     )
-    return {
+    if compute_complexity:
+        rationale += f"; complexity {complexity:.3f}"
+    result: Dict[str, float | str] = {
         "phonetic": phon,
         "semantic": sem,
         "fluency": flu_adj,
         "rationale": rationale,
     }
+    if compute_complexity:
+        result["complexity"] = complexity
+    return result
 
 # -----------------------------------------------------------------------------
 # Additional judges

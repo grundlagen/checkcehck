@@ -75,7 +75,8 @@ The modules under `src/` correspond to different parts of the pipeline:
   replacements for tokens in a sentence using the BK‑tree.  It does not
   perform any part‑of‑speech filtering; integrate with a tagger if needed.
 * `scoring.py` combines phonetic, semantic and fluency scores into a single
-  objective.  Stub functions are provided for semantic and fluency scoring.
+  objective.  A simple CORT complexity metric can also be incorporated with
+  a configurable weight.
 * `co_optimization.py` sketches a simple A⇄B co‑optimization loop.  Both the
   candidate generator and the function that adjusts the literal translation
   are passed in as callables so you can control how co‑optimization works.
@@ -90,8 +91,8 @@ full system; this code provides a scaffold on which to implement it.
 
 ### Audio‑assisted scoring and embedding semantics
 
-An alternate entry point, `main_audio.py`, extends the basic CLI by adding two
-optional capabilities:
+An alternate entry point, `main_audio.py`, extends the basic CLI by adding
+several optional capabilities:
 
 1. **Embedding‑based semantics.**  If the optional
    [`sentence_transformers`](https://www.sbert.net/) package is
@@ -113,18 +114,25 @@ optional capabilities:
    functions to integrate your own services.  Without overriding,
    the bonus will always be zero.
 
+3. **CORT complexity metric.**  Passing `--use-cort` enables computation of
+   a lightweight complexity score based on token length variance.  The
+   contribution of this score to the overall objective is controlled by
+   `--cort-weight` (default `0.0`).
+
 Example usage:
 
 ```sh
 # Install optional dependency for embeddings
 pip install sentence-transformers
-# Run with audio check enabled and a higher bonus
+# Run with audio check and CORT complexity enabled
 python main_audio.py \
   --src-text "the night rate" \
   --src-lang en \
   --tgt-lang fr \
   --use-audio-check \
-  --bonus-value 0.08
+  --bonus-value 0.08 \
+  --use-cort \
+  --cort-weight 0.05
 ```
 
 All other options from `main.py` (such as `--max-rounds` and
