@@ -131,3 +131,32 @@ All other options from `main.py` (such as `--max-rounds` and
 `--phonetic-threshold`) are still available.  This alternate script
 otherwise behaves identically, emitting a JSON summary of the literal
 and homophonic outputs along with component scores.
+
+### ML judge for holistic scoring
+
+`main_audio.py` also exposes an experimental `--ml-judge` flag.  When
+enabled, each candidate is evaluated by `src/ml_judge.py`, which fuses
+three machine‑learning signals into a single score:
+
+1. **TTS reconfirmation** – synthesize the candidate text, transcribe it
+   back via ASR and check whether the transcript matches the source.
+2. **Waveform similarity** – compare the synthesized waveforms of the
+   source and candidate directly.
+3. **Embedding similarity** – reuse the sentence embedding machinery from
+   `src/embedding.py` to gauge semantic closeness.
+
+The result JSON captures both the baseline judge output and the ML judge
+scores, allowing side‑by‑side comparison.  This feature relies on real
+TTS/ASR and embedding backends; the repository ships only stubs.  To make
+the judge meaningful you must provide:
+
+* A text‑to‑speech system and speech recognizer by overriding the
+  placeholder functions in `src/audio_helpers.py` or by calling
+  `set_tts_backend` in `src/ml_judge`.
+* A sentence‑embedding model, e.g. by installing
+  `sentence-transformers` (the default hook loads
+  `all-MiniLM-L6-v2`).  You may replace it with your own model by
+  calling `set_embedding_backend`.
+
+These hooks make it straightforward to swap in alternative ML models
+without modifying the core logic.
