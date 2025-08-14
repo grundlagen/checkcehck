@@ -1,0 +1,23 @@
+{
+  "name": "quackcoin_app",
+  "version": "1.0.0",
+  "description": "This repository contains a simple proof‑of‑concept implementation of the core components behind **Quack Coin**, a playful experiment blending audio‑oracles, meme‑driven tokenomics and on‑chain finance.  The goal of this project is to demonstrate how quack‑like recordings can be used to mint tokens, reward participants and drive a chaotic yet bounded price chart.",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "chai": "^5.2.1",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.22.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.5"
+  }
+}
