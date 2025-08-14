@@ -131,3 +131,39 @@ All other options from `main.py` (such as `--max-rounds` and
 `--phonetic-threshold`) are still available.  This alternate script
 otherwise behaves identically, emitting a JSON summary of the literal
 and homophonic outputs along with component scores.
+
+### ML Judge
+
+The `main_audio.py` CLI also exposes an experimental machine‑learning
+judge that blends multiple signals into a single score.  Enable it with
+the `--ml-judge` flag to compute both the traditional hand‑crafted score
+and an ML‑based score side by side.  The ML judge is implemented in
+`src/ml_judge.py` and combines:
+
+1. **TTS reconfirmation.** Candidate text is synthesized into speech and
+   transcribed back via ASR; if the transcript resembles the source
+   text, the judge grants a bonus.
+2. **Waveform similarity.** Both the source and candidate are synthesized
+   and their audio waveforms compared with a cosine metric.
+3. **Embedding comparison.** Sentence embeddings provide a semantic
+   similarity score between the source and candidate text.
+
+Each component can be individually toggled within `ml_judge`, and the
+final score is the average of the enabled pieces.  By default the module
+relies on the stub implementations in `src/audio_helpers.py` for
+text‑to‑speech and speech‑to‑text and therefore yields zeros until real
+backends are wired in.  For practical use you should override the
+`synthesize_audio` and `speech_to_text` helpers to call your preferred
+TTS/ASR systems.
+
+The embedding comparison uses the same optional
+[`sentence_transformers`](https://www.sbert.net/) dependency as the rest
+of the project.  Waveform similarity requires the `soundfile` and
+`numpy` packages:
+
+```sh
+pip install sentence-transformers soundfile numpy
+```
+
+Feel free to swap in alternative models by editing `ml_judge.py` or by
+monkey‑patching the helper functions at runtime.
