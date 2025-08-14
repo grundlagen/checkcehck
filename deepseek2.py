@@ -11,7 +11,9 @@ MAX_ATTEMPTS = 15
 
 # Path to the target script to fix
 FILE_PATH = r"C:\Users\Lenovo\.spyder-py3\xtts_match_embed.py"
-DEEPSEEK_API_KEY = "sk-1af9e4036f7d4bd4b6f2e0791c170489"
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+if not DEEPSEEK_API_KEY:
+    raise RuntimeError("DEEPSEEK_API_KEY environment variable is not set")
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 # Enhanced logging setup
