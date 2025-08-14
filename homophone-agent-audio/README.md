@@ -131,3 +131,21 @@ All other options from `main.py` (such as `--max-rounds` and
 `--phonetic-threshold`) are still available.  This alternate script
 otherwise behaves identically, emitting a JSON summary of the literal
 and homophonic outputs along with component scores.
+
+### CORT complexity evaluation
+
+The project also includes a small **CORT** (Complexity/Recursion Token) metric
+that estimates the linguistic complexity of a candidate using token entropy
+and syllable variation.  The `judge` helper always computes the score and
+reports it in the rationale string.  To have the score influence the final
+objective, supply a positive weight on the command line:
+
+```sh
+python main_audio.py \
+  --src-text "the night rate" \
+  --cort-weight 0.1
+```
+
+Setting the weight to zero disables the contribution of the CORT metric.  You
+may tune the weight to prioritise either simple or more complex phrases
+depending on your experiment.

@@ -126,6 +126,12 @@ def main() -> None:
         help="Score bonus to apply when a candidate passes the heard‑as test",
     )
     parser.add_argument(
+        "--cort-weight",
+        type=float,
+        default=0.0,
+        help="Weight for CORT complexity score in overall combination",
+    )
+    parser.add_argument(
         "--pairbank",
         default=None,
         help=(
@@ -169,7 +175,14 @@ def main() -> None:
     def score_candidate(B_text: str, B_ipa: str) -> ScoreBreakdown:
         # Compute component scores and combine using existing weighting
         comp = judge(src_text, ipa_src, A_text, B_text, B_ipa, phone_dist)
-        base = combine_scores(comp["phonetic"], comp["semantic"], comp["fluency"], 0.0)
+        base_raw = combine_scores(
+            comp["phonetic"],
+            comp["semantic"],
+            comp["fluency"],
+            0.0,
+            comp.get("cort", 0.0),
+            w_cort=args.cort_weight,
+        )
         # Optionally apply audio bonus; reconfirmation is not a hard gate because
         # the default audio helpers are stubs.  Clients can override
         # ``heard_as_bonus`` to integrate real TTS/ASR services.  We still call
@@ -195,13 +208,21 @@ def main() -> None:
             )
             if bonus > 0.0:
                 return ScoreBreakdown(
-                    base.phonetic,
-                    base.semantic,
-                    base.fluency,
-                    base.prosody,
-                    min(1.0, base.score + bonus),
+                    base_raw.phonetic,
+                    base_raw.semantic,
+                    base_raw.fluency,
+                    base_raw.prosody,
+                    base_raw.cort,
+                    min(1.0, base_raw.score + bonus),
                 )
-        return base
+        return ScoreBreakdown(
+            base_raw.phonetic,
+            base_raw.semantic,
+            base_raw.fluency,
+            base_raw.prosody,
+            base_raw.cort,
+            base_raw.score,
+        )
 
     # Candidate generation function
     def gen_cands(A: str) -> List[Tuple[str, str, Dict[str, Any]]]:
@@ -316,6 +337,7 @@ def main() -> None:
                     "semantic": round(s.semantic, 3),
                     "fluency": round(s.fluency, 3),
                     "prosody": round(s.prosody, 3),
+                    "cort": round(s.cort, 3),
                     "score": round(s.score, 3),
                 },
             }
@@ -333,6 +355,7 @@ def main() -> None:
             "semantic": round(best_scores.semantic, 3) if best_scores else None,
             "fluency": round(best_scores.fluency, 3) if best_scores else None,
             "prosody": round(best_scores.prosody, 3) if best_scores else None,
+            "cort": round(best_scores.cort, 3) if best_scores else None,
             "score": round(best_scores.score, 3) if best_scores else None,
         },
         "alternates": alt_list,
