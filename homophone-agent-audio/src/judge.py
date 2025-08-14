@@ -31,6 +31,7 @@ from .embedding import semantic_similarity
 from .orchestrator import fluency_score
 from .cognate import is_cognateish
 from .phone_distance import PhoneDistance
+from .cort import cort_score
 
 
 def judge(
@@ -53,9 +54,9 @@ def judge(
         phone_dist: A PhoneDistance instance for phonetic similarity.
 
     Returns:
-        A dictionary with keys ``phonetic``, ``semantic``, ``fluency`` and
-        ``rationale``. Scores are floats in [0, 1]. The rationale is a
-        concise human‑readable string summarizing the scores.
+        A dictionary with keys ``phonetic``, ``semantic``, ``fluency``,
+        ``cort`` and ``rationale``. Scores are floats in [0, 1]. The rationale
+        is a concise human‑readable string summarizing the scores.
     """
     # Semantic similarity between the literal translation and the candidate
     sem = semantic_similarity(A_text, B_text)
@@ -76,14 +77,17 @@ def judge(
     # Cap penalty at 0.3
     cog_pen = min(cog_pen, 0.3)
     flu_adj = max(0.0, flu - cog_pen)
+    # CORT complexity score
+    cort = cort_score(B_text)
     # Construct rationale string
     rationale = (
-        f"phonetic {phon:.3f}; semantic {sem:.3f}; fluency {flu_adj:.3f}"
+        f"phonetic {phon:.3f}; semantic {sem:.3f}; fluency {flu_adj:.3f}; cort {cort:.3f}"
     )
     return {
         "phonetic": phon,
         "semantic": sem,
         "fluency": flu_adj,
+        "cort": cort,
         "rationale": rationale,
     }
 

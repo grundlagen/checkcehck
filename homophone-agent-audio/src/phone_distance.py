@@ -77,4 +77,5 @@ class ScoreBreakdown:
     semantic: float
     fluency: float
     prosody: float
+    cort: float
     score: float
