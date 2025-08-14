@@ -1,0 +1,206 @@
+"""
+judge.py
+---------
+
+This module provides a small helper to compute phonetic, semantic and
+fluency scores for a candidate translation and to package them with a
+short rationale. It centralizes the core scoring logic so that the
+scoring and co‑optimization loop can be kept uncluttered.
+
+The judge function returns normalized values in the range [0, 1] and a
+concise string summarizing the component scores. It makes no attempt
+to explain how the scores were derived beyond reporting them; it
+explicitly avoids exposing chain‑of‑thought reasoning in keeping with
+OpenAI’s best practices.
+
+Usage:
+
+    from .phone_distance import PhoneDistance
+    from .judge import judge
+
+    pdist = PhoneDistance()
+    result = judge(src_text, src_ipa, A_text, B_text, B_ipa, pdist)
+    print(result)
+"""
+
+from __future__ import annotations
+
+from typing import Dict
+
+from .embedding import semantic_similarity
+from .orchestrator import fluency_score
+from .cognate import is_cognateish
+from .phone_distance import PhoneDistance
+from typing import Dict, Any, Optional
+import re
+from .cognate import is_cognateish
+
+
+def judge(
+    src_text: str,
+    ipa_src: str,
+    A_text: str,
+    B_text: str,
+    ipa_B: str,
+    phone_dist,
+    extra_meta: Optional[Dict[str, Any]] = None,
+) -> Dict[str, float]:
+    """
+    Return component scores + penalty components used by the decider.
+    - extra_meta may contain: pairbank_hit: bool, span_coverage: float, heard_as: float
+    """
+    extra_meta = extra_meta or {}
+    # Core components (as you had)
+    phon = phone_dist.similarity(ipa_src, ipa_B)
+    sem  = semantic_similarity(A_text, B_text)
+    flu  = fluency_score(B_text)
+
+    # --- Penalties & auxiliary signals ---
+    # 1) Cognate-ish penalty (discourage ENG-looking French)
+    cog_pen = 0.0
+    a_toks = A_text.split()
+    b_toks = B_text.split()
+    for a in a_toks:
+        for b in b_toks:
+            if is_cognateish(a, b, 0.85):
+                cog_pen += 0.03  # small per-hit penalty
+    cog_pen = min(0.20, cog_pen)
+
+    # 2) Single-char spam penalty
+    single_char_pen = 0.03 * sum(1 for t in b_toks if len(re.sub(r"[^\w]", "", t)) == 1)
+    single_char_pen = min(0.20, single_char_pen)
+
+    # 3) NE leakage / hallucination (proper-looking tokens in B not present in A)
+    a_lc = set(re.findall(r"[A-Za-zÀ-ÿ]+", A_text.lower()))
+    ne_pen = 0.0
+    for t in re.findall(r"[A-Za-zÀ-ÿ]+", B_text):
+        if t[:1].isupper() and t.lower() not in a_lc:
+            ne_pen += 0.06
+    ne_pen = min(0.30, ne_pen)
+
+    # 4) Prosody proxy (very light): penalize long non-vowel clusters; reward plausible syllable rhythm
+    vowels = set("aeiouyɑɒaæɐəɛeiɪɨʏyoɔuʊœøɜɞʌ")
+    seq = re.sub(r"\s+", "", ipa_B)
+    clusters = re.findall(rf"[^{''.join(vowels)}]+", seq)  # consonant runs
+    max_cluster = max((len(c) for c in clusters), default=0)
+    # Map cluster length to 0..1 score (<=2 good, >=6 bad)
+    prosody = max(0.0, 1.0 - max(0, max_cluster - 2) / 4.0)
+
+    # External signals from generation / audio
+    span_coverage = float(extra_meta.get("span_coverage", 0.0))  # 0..1
+    pairbank_hit  = bool(extra_meta.get("pairbank_hit", False))
+    heard_as      = float(extra_meta.get("heard_as", 0.0))       # 0..1 (audio reconfirmation)
+
+    # Final “softened” fluency after cognate/single-char penalties
+    flu_adj = max(0.0, flu - (cog_pen + single_char_pen) * 0.5)
+
+    return {
+        "phonetic": phon,
+        "semantic": sem,
+        "fluency":  flu_adj,
+        # extras for decider
+        "cognate_penalty":    cog_pen,
+        "single_char_penalty":single_char_pen,
+        "ne_penalty":         ne_pen,
+        "prosody":            prosody,
+        "span_coverage":      span_coverage,
+        "pairbank_hit":       1.0 if pairbank_hit else 0.0,
+        "heard_as":           heard_as,
+    }
+
+def decide(
+    scores: Dict[str, float],
+    tau_phon: float = 0.80,
+    tau_sem:  float = 0.60,
+    tau_mistr:float = 0.35,
+    tau_auth: float = 0.40,
+) -> Dict[str, float | bool]:
+    """
+    Multi-agent decision:
+      - Equivalence: phonetic & semantic must clear thresholds.
+      - Mistranslation: NE/hallucination penalties reduced by heard_as reconfirmation.
+      - Authenticity: fluency + prosody + span coverage.
+      - Pairbank hit can override strictness (safety valve): if pairbank_hit==1, allow slightly weak auth.
+    """
+    phon = scores.get("phonetic", 0.0)
+    sem  = scores.get("semantic", 0.0)
+    flu  = scores.get("fluency",  0.0)
+    pro  = scores.get("prosody",   0.0)
+    span = min(1.0, scores.get("span_coverage", 0.0))
+    heard= scores.get("heard_as",  0.0)
+    ne   = scores.get("ne_penalty",0.0)
+    pair = scores.get("pairbank_hit", 0.0) >= 1.0
+
+    equiv = (phon >= tau_phon) and (sem >= tau_sem)
+
+    # Mistranslation score: penalties minus audio reconfirmation
+    mistr = max(0.0, ne - 0.5*heard)  # heard_as partly forgives NE leakage
+
+    # Authenticity: fluent + prosodically sane + spans map to longer homophones
+    auth = 0.5*flu + 0.3*pro + 0.2*span
+
+    legit = (equiv and mistr < tau_mistr and auth >= tau_auth) or pair
+    return {
+        "equivalence":   equiv,
+        "mistranslation":mistr,
+        "authenticity":  auth,
+        "legit":         legit,
+    }
+
+# -----------------------------------------------------------------------------
+# Additional judges
+#
+# The CLEF JOKER pipeline uses multiple evaluators beyond basic phonetic,
+# semantic and fluency checks.  One useful evaluator is a TTS reconfirmation
+# judge: it synthesizes the candidate text into audio, runs speech
+# recognition, and checks whether the recognized transcript matches the
+# source sufficiently well.  This implementation relies on the helper
+# ``heard_as_bonus`` from ``src.audio_helpers``.  Because the default
+# environment lacks real TTS/ASR backends, the function currently returns
+# zero unless clients override the audio helpers.
+
+from .audio_helpers import heard_as_bonus  # type: ignore
+
+def judge_tts(
+    src_text: str,
+    src_ipa: str,
+    candidate_text: str,
+    candidate_ipa: str,
+    phone_dist: PhoneDistance,
+    bonus_threshold: float = 0.05,
+) -> float:
+    """Evaluate whether a candidate sounds sufficiently like the source via TTS/ASR.
+
+    This helper attempts to synthesize the candidate text into audio and
+    transcribe it back via ASR.  If the transcript matches the source
+    reasonably well (as determined by ``heard_as_bonus``), it returns 1.0.
+    Otherwise it returns 0.0.  The default thresholds used by
+    ``heard_as_bonus`` are conservative; callers can adjust
+    ``bonus_threshold`` to tweak the sensitivity.
+
+    Args:
+        src_text: The original source string.
+        src_ipa: The IPA representation of the source (can be empty).
+        candidate_text: The candidate translation text (French).
+        candidate_ipa: The IPA for the candidate translation.
+        phone_dist: A PhoneDistance instance used internally by
+            ``heard_as_bonus`` when computing phonetic similarity.
+        bonus_threshold: The bonus value requested; positive values
+            indicate that ASR must return this bonus or higher to pass.
+
+    Returns:
+        1.0 if the ASR reconfirmation passes; 0.0 otherwise.
+    """
+    try:
+        bonus = heard_as_bonus(
+            src_text,
+            src_ipa,
+            candidate_text,
+            candidate_ipa,
+            phone_dist,
+            bonus=bonus_threshold,
+        )
+        return 1.0 if bonus and bonus > 0.0 else 0.0
+    except Exception:
+        # On any error, treat as failure (no ASR reconfirmation)
+        return 0.0

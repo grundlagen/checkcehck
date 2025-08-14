@@ -1,0 +1,10 @@
+# Base dependencies for the homophonic–literal dual translation agent
+phonemizer
+panphon
+rapidfuzz
+unidecode
+
+# Optional dependency for embedding semantics
+# Install with `pip install sentence-transformers` to enable embedding
+#‑based semantic similarity in `main_audio.py`.
+sentence-transformers
