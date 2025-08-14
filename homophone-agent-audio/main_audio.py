@@ -63,6 +63,7 @@ from src.lexicon import load_lexique
 from src.phone_distance import PhoneDistance, ScoreBreakdown
 from src.scoring import combine_scores
 from src.judge import judge, judge_tts
+from src.ml_judge import ml_judge
 from src.audio_helpers import heard_as_bonus
 
 
@@ -126,6 +127,14 @@ def main() -> None:
         help="Score bonus to apply when a candidate passes the heard‑as test",
     )
     parser.add_argument(
+        "--ml-judge",
+        action="store_true",
+        help=(
+            "Route scoring through the experimental ML judge that fuses "
+            "TTS reconfirmation, waveform similarity and embedding comparisons"
+        ),
+    )
+    parser.add_argument(
         "--pairbank",
         default=None,
         help=(
@@ -166,16 +175,13 @@ def main() -> None:
     phone_dist = PhoneDistance()
 
     # Scoring function wrapper
-    def score_candidate(B_text: str, B_ipa: str) -> ScoreBreakdown:
-        # Compute component scores and combine using existing weighting
+    def score_candidate(B_text: str, B_ipa: str):
+        """Compute baseline and optional ML judge scores for a candidate."""
+
         comp = judge(src_text, ipa_src, A_text, B_text, B_ipa, phone_dist)
         base = combine_scores(comp["phonetic"], comp["semantic"], comp["fluency"], 0.0)
-        # Optionally apply audio bonus; reconfirmation is not a hard gate because
-        # the default audio helpers are stubs.  Clients can override
-        # ``heard_as_bonus`` to integrate real TTS/ASR services.  We still call
-        # ``judge_tts`` so that callers can inspect the reconfirmation
-        # likelihood if desired, but we do not drop candidates solely on its
-        # output.
+
+        # Optionally apply audio bonus; reconfirmation is not a hard gate.
         if args.use_audio_check:
             _reconf_score = judge_tts(
                 src_text,
@@ -194,14 +200,17 @@ def main() -> None:
                 bonus=args.bonus_value,
             )
             if bonus > 0.0:
-                return ScoreBreakdown(
+                base = ScoreBreakdown(
                     base.phonetic,
                     base.semantic,
                     base.fluency,
                     base.prosody,
                     min(1.0, base.score + bonus),
                 )
-        return base
+
+        ml_scores = ml_judge(src_text, B_text) if args.ml_judge else None
+        final_score = ml_scores["score"] if ml_scores else base.score
+        return base, ml_scores, final_score
 
     # Candidate generation function
     def gen_cands(A: str) -> List[Tuple[str, str, Dict[str, Any]]]:
@@ -279,12 +288,12 @@ def main() -> None:
     A_current = A_text
     candidates_current = candidates
     for step in range(max(1, args.max_rounds or 1)):
-        scored: List[Tuple[str, str, ScoreBreakdown]] = []
+        scored: List[Tuple[str, str, ScoreBreakdown, Dict[str, float] | None, float]] = []
         for B_text, B_ipa, _meta in candidates_current:
-            s = score_candidate(B_text, B_ipa)
-            scored.append((B_text, B_ipa, s))
-        scored.sort(key=lambda x: x[2].score, reverse=True)
-        best_B, best_B_ipa, best_scores = scored[0]
+            base_s, ml_s, final_s = score_candidate(B_text, B_ipa)
+            scored.append((B_text, B_ipa, base_s, ml_s, final_s))
+        scored.sort(key=lambda x: x[4], reverse=True)
+        best_B, best_B_ipa, best_scores, best_ml_scores, _ = scored[0]
         # Early break if phonetic score meets threshold
         if best_scores.phonetic >= args.phonetic_threshold:
             break
@@ -297,29 +306,34 @@ def main() -> None:
 
     # Compile alternates list (excluding best)
     alt_list: List[Dict[str, Any]] = []
-    for B_text, B_ipa, s in sorted(
-        [
-            (B_text, B_ipa, score_candidate(B_text, B_ipa))
-            for (B_text, B_ipa, _meta) in candidates
-        ],
-        key=lambda x: x[2].score,
-        reverse=True,
+    # Rescore initial candidates so that both baseline and ML judge outputs
+    # are available for comparison.
+    scored_alts: List[
+        Tuple[str, str, ScoreBreakdown, Dict[str, float] | None, float]
+    ] = []
+    for (B_text, B_ipa, _meta) in candidates:
+        base_s, ml_s, final_s = score_candidate(B_text, B_ipa)
+        scored_alts.append((B_text, B_ipa, base_s, ml_s, final_s))
+    for B_text, B_ipa, s_base, s_ml, final_s in sorted(
+        scored_alts, key=lambda x: x[4], reverse=True
     ):
         if best_B is not None and B_text == best_B:
             continue
-        alt_list.append(
-            {
-                "text": B_text,
-                "ipa": B_ipa,
-                "scores": {
-                    "phonetic": round(s.phonetic, 3),
-                    "semantic": round(s.semantic, 3),
-                    "fluency": round(s.fluency, 3),
-                    "prosody": round(s.prosody, 3),
-                    "score": round(s.score, 3),
-                },
-            }
-        )
+        alt_entry: Dict[str, Any] = {
+            "text": B_text,
+            "ipa": B_ipa,
+            "scores_baseline": {
+                "phonetic": round(s_base.phonetic, 3),
+                "semantic": round(s_base.semantic, 3),
+                "fluency": round(s_base.fluency, 3),
+                "prosody": round(s_base.prosody, 3),
+                "score": round(s_base.score, 3),
+            },
+            "score": round(final_s, 3),
+        }
+        if s_ml is not None:
+            alt_entry["scores_ml"] = {k: round(v, 3) for k, v in s_ml.items()}
+        alt_list.append(alt_entry)
 
     # Build result object
     result = {
@@ -328,13 +342,19 @@ def main() -> None:
         "ipa_src": ipa_src,
         "ipa_literal": ipa_A,
         "ipa_homophonic": best_B_ipa,
-        "scores": {
+        "scores_baseline": {
             "phonetic": round(best_scores.phonetic, 3) if best_scores else None,
             "semantic": round(best_scores.semantic, 3) if best_scores else None,
             "fluency": round(best_scores.fluency, 3) if best_scores else None,
             "prosody": round(best_scores.prosody, 3) if best_scores else None,
             "score": round(best_scores.score, 3) if best_scores else None,
         },
+        "scores_ml": (
+            {k: round(v, 3) for k, v in best_ml_scores.items()} if best_ml_scores else None
+        ),
+        "score": round(
+            best_ml_scores["score"] if best_ml_scores else best_scores.score, 3
+        ) if best_scores else None,
         "alternates": alt_list,
         "notes": (
             "Embedding semantics are used when available; audio bonus is "
