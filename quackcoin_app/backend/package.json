@@ -1,0 +1,13 @@
+{
+  "name": "quackcoin-backend",
+  "version": "0.1.0",
+  "description": "Prototype backend for the QuackCoin audio oracle",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5"
+  }
+}
