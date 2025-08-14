@@ -126,6 +126,11 @@ def main() -> None:
         help="Score bonus to apply when a candidate passes the heard‑as test",
     )
     parser.add_argument(
+        "--require-tts-confirm",
+        action="store_true",
+        help="Filter out candidates that do not pass the TTS reconfirmation",
+    )
+    parser.add_argument(
         "--pairbank",
         default=None,
         help=(
@@ -166,42 +171,50 @@ def main() -> None:
     phone_dist = PhoneDistance()
 
     # Scoring function wrapper
-    def score_candidate(B_text: str, B_ipa: str) -> ScoreBreakdown:
+    def score_candidate(B_text: str, B_ipa: str) -> Tuple[ScoreBreakdown, bool]:
         # Compute component scores and combine using existing weighting
         comp = judge(src_text, ipa_src, A_text, B_text, B_ipa, phone_dist)
         base = combine_scores(comp["phonetic"], comp["semantic"], comp["fluency"], 0.0)
-        # Optionally apply audio bonus; reconfirmation is not a hard gate because
-        # the default audio helpers are stubs.  Clients can override
-        # ``heard_as_bonus`` to integrate real TTS/ASR services.  We still call
-        # ``judge_tts`` so that callers can inspect the reconfirmation
-        # likelihood if desired, but we do not drop candidates solely on its
-        # output.
-        if args.use_audio_check:
-            _reconf_score = judge_tts(
-                src_text,
-                ipa_src,
-                B_text,
-                B_ipa,
-                phone_dist,
-                bonus_threshold=args.bonus_value,
-            )
-            bonus = heard_as_bonus(
-                src_text,
-                ipa_src,
-                B_text,
-                B_ipa,
-                phone_dist,
-                bonus=args.bonus_value,
-            )
-            if bonus > 0.0:
-                return ScoreBreakdown(
-                    base.phonetic,
-                    base.semantic,
-                    base.fluency,
-                    base.prosody,
-                    min(1.0, base.score + bonus),
+        tts_reconfirm = False
+        bonus = 0.0
+        # Run TTS reconfirmation when audio checks are enabled or required
+        if args.use_audio_check or args.require_tts_confirm:
+            tts_reconfirm = bool(
+                judge_tts(
+                    src_text,
+                    ipa_src,
+                    B_text,
+                    B_ipa,
+                    phone_dist,
+                    bonus_threshold=args.bonus_value,
                 )
-        return base
+            )
+            if args.use_audio_check:
+                bonus = heard_as_bonus(
+                    src_text,
+                    ipa_src,
+                    B_text,
+                    B_ipa,
+                    phone_dist,
+                    bonus=args.bonus_value,
+                )
+        if bonus > 0.0:
+            scored = ScoreBreakdown(
+                base.phonetic,
+                base.semantic,
+                base.fluency,
+                base.prosody,
+                min(1.0, base.score + bonus),
+            )
+        else:
+            scored = ScoreBreakdown(
+                base.phonetic,
+                base.semantic,
+                base.fluency,
+                base.prosody,
+                base.score,
+            )
+        return scored, tts_reconfirm
 
     # Candidate generation function
     def gen_cands(A: str) -> List[Tuple[str, str, Dict[str, Any]]]:
@@ -276,15 +289,20 @@ def main() -> None:
     best_B = None  # type: ignore
     best_B_ipa = None  # type: ignore
     best_scores = None  # type: ignore
+    best_reconf = False
     A_current = A_text
     candidates_current = candidates
     for step in range(max(1, args.max_rounds or 1)):
-        scored: List[Tuple[str, str, ScoreBreakdown]] = []
+        scored: List[Tuple[str, str, ScoreBreakdown, bool]] = []
         for B_text, B_ipa, _meta in candidates_current:
-            s = score_candidate(B_text, B_ipa)
-            scored.append((B_text, B_ipa, s))
+            s, reconf = score_candidate(B_text, B_ipa)
+            if args.require_tts_confirm and not reconf:
+                continue
+            scored.append((B_text, B_ipa, s, reconf))
+        if not scored:
+            break
         scored.sort(key=lambda x: x[2].score, reverse=True)
-        best_B, best_B_ipa, best_scores = scored[0]
+        best_B, best_B_ipa, best_scores, best_reconf = scored[0]
         # Early break if phonetic score meets threshold
         if best_scores.phonetic >= args.phonetic_threshold:
             break
@@ -297,11 +315,14 @@ def main() -> None:
 
     # Compile alternates list (excluding best)
     alt_list: List[Dict[str, Any]] = []
-    for B_text, B_ipa, s in sorted(
-        [
-            (B_text, B_ipa, score_candidate(B_text, B_ipa))
-            for (B_text, B_ipa, _meta) in candidates
-        ],
+    cand_scored: List[Tuple[str, str, ScoreBreakdown, bool]] = []
+    for B_text, B_ipa, _meta in candidates:
+        s, reconf = score_candidate(B_text, B_ipa)
+        if args.require_tts_confirm and not reconf:
+            continue
+        cand_scored.append((B_text, B_ipa, s, reconf))
+    for B_text, B_ipa, s, reconf in sorted(
+        cand_scored,
         key=lambda x: x[2].score,
         reverse=True,
     ):
@@ -311,6 +332,7 @@ def main() -> None:
             {
                 "text": B_text,
                 "ipa": B_ipa,
+                "tts_reconfirm": reconf,
                 "scores": {
                     "phonetic": round(s.phonetic, 3),
                     "semantic": round(s.semantic, 3),
@@ -328,6 +350,7 @@ def main() -> None:
         "ipa_src": ipa_src,
         "ipa_literal": ipa_A,
         "ipa_homophonic": best_B_ipa,
+        "tts_reconfirm": best_reconf,
         "scores": {
             "phonetic": round(best_scores.phonetic, 3) if best_scores else None,
             "semantic": round(best_scores.semantic, 3) if best_scores else None,
