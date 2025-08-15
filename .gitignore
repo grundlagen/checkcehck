@@ -1,0 +1,25 @@
+# Logs
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# SQLite databases
+*.sqlite
+*.sqlite3
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.venv/
+venv/
+
+# OS generated files
+.DS_Store
+
+# Temporary files
+*.tmp
+*.swp
