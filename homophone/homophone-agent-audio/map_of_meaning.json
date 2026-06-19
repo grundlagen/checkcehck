@@ -1,0 +1,958 @@
+{
+  "meta": {
+    "homophone_edges": 39133,
+    "meaning_entries": 119,
+    "synonym_entries": 208,
+    "wordnet": false,
+    "weights": {
+      "sound": 0.35,
+      "meaning": 0.65
+    },
+    "bridges_built": 2962,
+    "resonant_bridges": 1
+  },
+  "whittle_history": [
+    {
+      "index": 0,
+      "kept": 51,
+      "clusters": 51,
+      "mean_resonance": 0.1408
+    },
+    {
+      "index": 1,
+      "kept": 36,
+      "clusters": 36,
+      "mean_resonance": 0.1995
+    }
+  ],
+  "resonant": [
+    {
+      "en_src": "net",
+      "fr_tgt": "net",
+      "phon": 1.0,
+      "meaning": 1.0,
+      "resonance": 1.0,
+      "kind": "resonant",
+      "glosses": [
+        "clean",
+        "clear",
+        "net",
+        "sharp"
+      ],
+      "meeting": [
+        "net",
+        "net"
+      ],
+      "path": [
+        "EN:net",
+        "≈sound≈",
+        "FR:net",
+        "=means=",
+        "EN:net"
+      ]
+    }
+  ],
+  "map": {
+    "net": [
+      {
+        "en_src": "net",
+        "fr_tgt": "net",
+        "phon": 1.0,
+        "meaning": 1.0,
+        "resonance": 1.0,
+        "kind": "resonant",
+        "glosses": [
+          "clean",
+          "clear",
+          "net",
+          "sharp"
+        ],
+        "meeting": [
+          "net",
+          "net"
+        ],
+        "path": [
+          "EN:net",
+          "≈sound≈",
+          "FR:net",
+          "=means=",
+          "EN:net"
+        ]
+      }
+    ],
+    "nape": [
+      {
+        "en_src": "cou",
+        "fr_tgt": "cou",
+        "phon": 1.0,
+        "meaning": 0.0,
+        "resonance": 0.35,
+        "kind": "latent",
+        "glosses": [
+          "neck"
+        ],
+        "meeting": [
+          "cou",
+          ""
+        ],
+        "path": [
+          "EN:cou",
+          "≈sound≈",
+          "FR:cou",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "blow": [
+      {
+        "en_src": "coup",
+        "fr_tgt": "coup",
+        "phon": 1.0,
+        "meaning": 0.0,
+        "resonance": 0.35,
+        "kind": "latent",
+        "glosses": [
+          "blow",
+          "hit",
+          "strike"
+        ],
+        "meeting": [
+          "coup",
+          ""
+        ],
+        "path": [
+          "EN:coup",
+          "≈sound≈",
+          "FR:coup",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "jeans": [
+      {
+        "en_src": "jean",
+        "fr_tgt": "jean",
+        "phon": 1.0,
+        "meaning": 0.0,
+        "resonance": 0.35,
+        "kind": "latent",
+        "glosses": [
+          "jeans"
+        ],
+        "meeting": [
+          "jean",
+          ""
+        ],
+        "path": [
+          "EN:jean",
+          "≈sound≈",
+          "FR:jean",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "or": [
+      {
+        "en_src": "ou",
+        "fr_tgt": "ou",
+        "phon": 1.0,
+        "meaning": 0.0,
+        "resonance": 0.35,
+        "kind": "latent",
+        "glosses": [
+          "or"
+        ],
+        "meeting": [
+          "ou",
+          ""
+        ],
+        "path": [
+          "EN:ou",
+          "≈sound≈",
+          "FR:ou",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "beak": [
+      {
+        "en_src": "notte",
+        "fr_tgt": "note",
+        "phon": 0.8571,
+        "meaning": 0.0,
+        "resonance": 0.3,
+        "kind": "latent",
+        "glosses": [
+          "bill",
+          "grade",
+          "mark",
+          "memo",
+          "note"
+        ],
+        "meeting": [
+          "notte",
+          ""
+        ],
+        "path": [
+          "EN:notte",
+          "≈sound≈",
+          "FR:note",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "clean": [
+      {
+        "en_src": "net",
+        "fr_tgt": "nets",
+        "phon": 0.8,
+        "meaning": 0.0,
+        "resonance": 0.28,
+        "kind": "latent",
+        "glosses": [
+          "clean",
+          "clear",
+          "nets"
+        ],
+        "meeting": [
+          "net",
+          ""
+        ],
+        "path": [
+          "EN:net",
+          "≈sound≈",
+          "FR:nets",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "yours": [
+      {
+        "en_src": "tien",
+        "fr_tgt": "tienne",
+        "phon": 0.75,
+        "meaning": 0.0,
+        "resonance": 0.2625,
+        "kind": "latent",
+        "glosses": [
+          "yours"
+        ],
+        "meeting": [
+          "tien",
+          ""
+        ],
+        "path": [
+          "EN:tien",
+          "≈sound≈",
+          "FR:tienne",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "bills": [
+      {
+        "en_src": "notte",
+        "fr_tgt": "notes",
+        "phon": 0.75,
+        "meaning": 0.0,
+        "resonance": 0.2625,
+        "kind": "latent",
+        "glosses": [
+          "bills",
+          "grades",
+          "marks",
+          "notes"
+        ],
+        "meeting": [
+          "notte",
+          ""
+        ],
+        "path": [
+          "EN:notte",
+          "≈sound≈",
+          "FR:notes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "tents": [
+      {
+        "en_src": "tess",
+        "fr_tgt": "tentes",
+        "phon": 0.5714,
+        "meaning": 0.0,
+        "resonance": 0.2,
+        "kind": "latent",
+        "glosses": [
+          "tents"
+        ],
+        "meeting": [
+          "tess",
+          ""
+        ],
+        "path": [
+          "EN:tess",
+          "≈sound≈",
+          "FR:tentes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "bench": [
+      {
+        "en_src": "ba",
+        "fr_tgt": "banc",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "bench"
+        ],
+        "meeting": [
+          "ba",
+          ""
+        ],
+        "path": [
+          "EN:ba",
+          "≈sound≈",
+          "FR:banc",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "camp": [
+      {
+        "en_src": "ca",
+        "fr_tgt": "camp",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "camp"
+        ],
+        "meeting": [
+          "ca",
+          ""
+        ],
+        "path": [
+          "EN:ca",
+          "≈sound≈",
+          "FR:camp",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "in": [
+      {
+        "en_src": "da",
+        "fr_tgt": "dans",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "in",
+          "inside"
+        ],
+        "meeting": [
+          "da",
+          ""
+        ],
+        "path": [
+          "EN:da",
+          "≈sound≈",
+          "FR:dans",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "blood": [
+      {
+        "en_src": "sa",
+        "fr_tgt": "sang",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "blood"
+        ],
+        "meeting": [
+          "sa",
+          ""
+        ],
+        "path": [
+          "EN:sa",
+          "≈sound≈",
+          "FR:sang",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "without": [
+      {
+        "en_src": "sa",
+        "fr_tgt": "sans",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "without"
+        ],
+        "meeting": [
+          "sa",
+          ""
+        ],
+        "path": [
+          "EN:sa",
+          "≈sound≈",
+          "FR:sans",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "so many": [
+      {
+        "en_src": "ta",
+        "fr_tgt": "tant",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "so many",
+          "so much"
+        ],
+        "meeting": [
+          "ta",
+          ""
+        ],
+        "path": [
+          "EN:ta",
+          "≈sound≈",
+          "FR:tant",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "horsefly": [
+      {
+        "en_src": "ta",
+        "fr_tgt": "taon",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "horsefly"
+        ],
+        "meeting": [
+          "ta",
+          ""
+        ],
+        "path": [
+          "EN:ta",
+          "≈sound≈",
+          "FR:taon",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "hues": [
+      {
+        "en_src": "tess",
+        "fr_tgt": "teintes",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "hues",
+          "shades",
+          "tints"
+        ],
+        "meeting": [
+          "tess",
+          ""
+        ],
+        "path": [
+          "EN:tess",
+          "≈sound≈",
+          "FR:teintes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "shearings": [
+      {
+        "en_src": "tess",
+        "fr_tgt": "tontes",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "shearings"
+        ],
+        "meeting": [
+          "tess",
+          ""
+        ],
+        "path": [
+          "EN:tess",
+          "≈sound≈",
+          "FR:tontes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "chime": [
+      {
+        "en_src": "tien",
+        "fr_tgt": "tintent",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "chime",
+          "ring",
+          "tinkle"
+        ],
+        "meeting": [
+          "tien",
+          ""
+        ],
+        "path": [
+          "EN:tien",
+          "≈sound≈",
+          "FR:tintent",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "aunts": [
+      {
+        "en_src": "tess",
+        "fr_tgt": "tantes",
+        "phon": 0.5,
+        "meaning": 0.0,
+        "resonance": 0.175,
+        "kind": "latent",
+        "glosses": [
+          "aunts"
+        ],
+        "meeting": [
+          "tess",
+          ""
+        ],
+        "path": [
+          "EN:tess",
+          "≈sound≈",
+          "FR:tantes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "charge": [
+      {
+        "en_src": "coo",
+        "fr_tgt": "coût",
+        "phon": 0.4,
+        "meaning": 0.0,
+        "resonance": 0.14,
+        "kind": "latent",
+        "glosses": [
+          "cost"
+        ],
+        "meeting": [
+          "coo",
+          ""
+        ],
+        "path": [
+          "EN:coo",
+          "≈sound≈",
+          "FR:coût",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "suckles": [
+      {
+        "en_src": "tet",
+        "fr_tgt": "tète",
+        "phon": 0.4,
+        "meaning": 0.0,
+        "resonance": 0.14,
+        "kind": "latent",
+        "glosses": [
+          "suckles",
+          "sucks"
+        ],
+        "meeting": [
+          "tet",
+          ""
+        ],
+        "path": [
+          "EN:tet",
+          "≈sound≈",
+          "FR:tète",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "attempt": [
+      {
+        "en_src": "fen",
+        "fr_tgt": "tente",
+        "phon": 0.4,
+        "meaning": 0.0,
+        "resonance": 0.14,
+        "kind": "latent",
+        "glosses": [
+          "attempt",
+          "tempts",
+          "tent",
+          "tries"
+        ],
+        "meeting": [
+          "fen",
+          ""
+        ],
+        "path": [
+          "EN:fen",
+          "≈sound≈",
+          "FR:tente",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "field": [
+      {
+        "en_src": "sha",
+        "fr_tgt": "champ",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "field"
+        ],
+        "meeting": [
+          "sha",
+          ""
+        ],
+        "path": [
+          "EN:sha",
+          "≈sound≈",
+          "FR:champ",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "singing": [
+      {
+        "en_src": "sha",
+        "fr_tgt": "chant",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "singing",
+          "song"
+        ],
+        "meeting": [
+          "sha",
+          ""
+        ],
+        "path": [
+          "EN:sha",
+          "≈sound≈",
+          "FR:chant",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "color": [
+      {
+        "en_src": "tet",
+        "fr_tgt": "teinte",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "hue",
+          "shade",
+          "tinge",
+          "tint"
+        ],
+        "meeting": [
+          "tet",
+          ""
+        ],
+        "path": [
+          "EN:tet",
+          "≈sound≈",
+          "FR:teinte",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "chimes": [
+      {
+        "en_src": "tet",
+        "fr_tgt": "tinte",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "chimes",
+          "rings",
+          "tinkles"
+        ],
+        "meeting": [
+          "tet",
+          ""
+        ],
+        "path": [
+          "EN:tet",
+          "≈sound≈",
+          "FR:tinte",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "cutting": [
+      {
+        "en_src": "tec",
+        "fr_tgt": "tonte",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "mowing",
+          "shearing"
+        ],
+        "meeting": [
+          "tec",
+          ""
+        ],
+        "path": [
+          "EN:tec",
+          "≈sound≈",
+          "FR:tonte",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "aunt": [
+      {
+        "en_src": "tete",
+        "fr_tgt": "tante",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "aunt"
+        ],
+        "meeting": [
+          "tete",
+          ""
+        ],
+        "path": [
+          "EN:tete",
+          "≈sound≈",
+          "FR:tante",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "falls": [
+      {
+        "en_src": "ben",
+        "fr_tgt": "tombe",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "falls",
+          "grave",
+          "tomb"
+        ],
+        "meeting": [
+          "ben",
+          ""
+        ],
+        "path": [
+          "EN:ben",
+          "≈sound≈",
+          "FR:tombe",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "bonnet": [
+      {
+        "en_src": "tot",
+        "fr_tgt": "toque",
+        "phon": 0.3333,
+        "meaning": 0.0,
+        "resonance": 0.1167,
+        "kind": "latent",
+        "glosses": [
+          "cap",
+          "hat",
+          "toque"
+        ],
+        "meeting": [
+          "tot",
+          ""
+        ],
+        "path": [
+          "EN:tot",
+          "≈sound≈",
+          "FR:toque",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "graves": [
+      {
+        "en_src": "bec",
+        "fr_tgt": "tombes",
+        "phon": 0.2857,
+        "meaning": 0.0,
+        "resonance": 0.1,
+        "kind": "latent",
+        "glosses": [
+          "graves",
+          "tombs"
+        ],
+        "meeting": [
+          "bec",
+          ""
+        ],
+        "path": [
+          "EN:bec",
+          "≈sound≈",
+          "FR:tombes",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "caps": [
+      {
+        "en_src": "tot",
+        "fr_tgt": "toques",
+        "phon": 0.2857,
+        "meaning": 0.0,
+        "resonance": 0.1,
+        "kind": "latent",
+        "glosses": [
+          "caps",
+          "hats"
+        ],
+        "meeting": [
+          "tot",
+          ""
+        ],
+        "path": [
+          "EN:tot",
+          "≈sound≈",
+          "FR:toques",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "annum": [
+      {
+        "en_src": "ah",
+        "fr_tgt": "an",
+        "phon": 0.0,
+        "meaning": 0.0,
+        "resonance": 0.0,
+        "kind": "latent",
+        "glosses": [
+          "year"
+        ],
+        "meeting": [
+          "ah",
+          ""
+        ],
+        "path": [
+          "EN:ah",
+          "≈sound≈",
+          "FR:an",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ],
+    "years": [
+      {
+        "en_src": "ah",
+        "fr_tgt": "ans",
+        "phon": 0.0,
+        "meaning": 0.0,
+        "resonance": 0.0,
+        "kind": "latent",
+        "glosses": [
+          "years"
+        ],
+        "meeting": [
+          "ah",
+          ""
+        ],
+        "path": [
+          "EN:ah",
+          "≈sound≈",
+          "FR:ans",
+          "=means=",
+          "EN:?"
+        ]
+      }
+    ]
+  }
+}
