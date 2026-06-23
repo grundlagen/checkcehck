@@ -1,0 +1,780 @@
+{
+  "pairbank": "data/pairbank.tsv",
+  "oracle_tier": "gloss",
+  "graph": {
+    "nodes": 10197,
+    "sound_bridges": 39133,
+    "synonym_edges": 47299
+  },
+  "chains_found": 184,
+  "whittle_history": [
+    219,
+    219,
+    219,
+    219,
+    215,
+    166,
+    122
+  ],
+  "top_chains": [
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "gnaw"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "maw"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "maw"
+        ],
+        [
+          "en",
+          "ma"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "maw"
+        ],
+        [
+          "en",
+          "mah"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "ma"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "ma"
+        ],
+        [
+          "en",
+          "mah"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "ma"
+        ],
+        [
+          "en",
+          "maw"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nom"
+        ],
+        [
+          "en",
+          "mah"
+        ],
+        [
+          "fr",
+          "mon"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "knot"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "knott"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "knott"
+        ],
+        [
+          "en",
+          "not"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "knott"
+        ],
+        [
+          "en",
+          "nett"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "knott"
+        ],
+        [
+          "en",
+          "notte"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "not"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "not"
+        ],
+        [
+          "en",
+          "knott"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "nantes"
+        ],
+        [
+          "en",
+          "not"
+        ],
+        [
+          "en",
+          "nett"
+        ],
+        [
+          "fr",
+          "tantes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "naught"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "naught"
+        ],
+        [
+          "en",
+          "nott"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "copp"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "besse"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "besse"
+        ],
+        [
+          "en",
+          "baade"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "besse"
+        ],
+        [
+          "en",
+          "baud"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "besse"
+        ],
+        [
+          "en",
+          "koss"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "notes"
+        ],
+        [
+          "en",
+          "besse"
+        ],
+        [
+          "en",
+          "poss"
+        ],
+        [
+          "fr",
+          "tontes"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    },
+    {
+      "path": [
+        [
+          "fr",
+          "net"
+        ],
+        [
+          "en",
+          "net"
+        ],
+        [
+          "fr",
+          "tente"
+        ]
+      ],
+      "sound": 0.5625,
+      "meaning": 1.0,
+      "score": 0.5625
+    }
+  ],
+  "correspondences": [
+    {
+      "en": "thuy",
+      "fr": "tout",
+      "confidence": 1.0,
+      "meaning_sim": 0.4,
+      "en_gloss": "thuy",
+      "fr_gloss": "all",
+      "grail": false
+    },
+    {
+      "en": "penn",
+      "fr": "tantes",
+      "confidence": 0.9615,
+      "meaning_sim": 0.333,
+      "en_gloss": "penn",
+      "fr_gloss": "aunt",
+      "grail": false
+    },
+    {
+      "en": "thuy",
+      "fr": "toux",
+      "confidence": 0.8415,
+      "meaning_sim": 0.333,
+      "en_gloss": "thuy",
+      "fr_gloss": "cough",
+      "grail": false
+    },
+    {
+      "en": "topp",
+      "fr": "tempes",
+      "confidence": 0.6877,
+      "meaning_sim": 0.333,
+      "en_gloss": "topp",
+      "fr_gloss": "temple (of head)",
+      "grail": false
+    },
+    {
+      "en": "besse",
+      "fr": "notes",
+      "confidence": 0.6705,
+      "meaning_sim": 0.333,
+      "en_gloss": "besse",
+      "fr_gloss": "note",
+      "grail": false
+    },
+    {
+      "en": "nett",
+      "fr": "net",
+      "confidence": 0.6705,
+      "meaning_sim": 1.0,
+      "en_gloss": "nett",
+      "fr_gloss": "clean/clear",
+      "grail": false
+    },
+    {
+      "en": "tet",
+      "fr": "teinte",
+      "confidence": 0.6705,
+      "meaning_sim": 0.5,
+      "en_gloss": "tet",
+      "fr_gloss": "tint/shade",
+      "grail": false
+    },
+    {
+      "en": "tet",
+      "fr": "teintes",
+      "confidence": 0.6705,
+      "meaning_sim": 0.4,
+      "en_gloss": "tet",
+      "fr_gloss": "tint/shade",
+      "grail": false
+    },
+    {
+      "en": "tien",
+      "fr": "tienne",
+      "confidence": 0.6705,
+      "meaning_sim": 1.0,
+      "en_gloss": "tien",
+      "fr_gloss": "yours",
+      "grail": false
+    },
+    {
+      "en": "knott",
+      "fr": "nantes",
+      "confidence": 0.5861,
+      "meaning_sim": 0.286,
+      "en_gloss": "knott",
+      "fr_gloss": "Nantes (city)",
+      "grail": false
+    },
+    {
+      "en": "paup",
+      "fr": "tombes",
+      "confidence": 0.5392,
+      "meaning_sim": 0.0,
+      "en_gloss": "paup",
+      "fr_gloss": "tomb/grave",
+      "grail": false
+    },
+    {
+      "en": "sette",
+      "fr": "tente",
+      "confidence": 0.53,
+      "meaning_sim": 0.5,
+      "en_gloss": "sette",
+      "fr_gloss": "tent",
+      "grail": false
+    },
+    {
+      "en": "topp",
+      "fr": "tempe",
+      "confidence": 0.497,
+      "meaning_sim": 0.4,
+      "en_gloss": "topp",
+      "fr_gloss": "temple (of head)",
+      "grail": false
+    },
+    {
+      "en": "taube",
+      "fr": "tombes",
+      "confidence": 0.4746,
+      "meaning_sim": 0.375,
+      "en_gloss": "taube",
+      "fr_gloss": "tomb/grave",
+      "grail": false
+    },
+    {
+      "en": "maw",
+      "fr": "nom",
+      "confidence": 0.4639,
+      "meaning_sim": 0.2,
+      "en_gloss": "maw",
+      "fr_gloss": "name",
+      "grail": false
+    },
+    {
+      "en": "ma",
+      "fr": "nom",
+      "confidence": 0.4639,
+      "meaning_sim": 0.25,
+      "en_gloss": "ma",
+      "fr_gloss": "name",
+      "grail": false
+    },
+    {
+      "en": "mah",
+      "fr": "mon",
+      "confidence": 0.461,
+      "meaning_sim": 0.2,
+      "en_gloss": "mah",
+      "fr_gloss": "mon",
+      "grail": false
+    },
+    {
+      "en": "not",
+      "fr": "nantes",
+      "confidence": 0.4532,
+      "meaning_sim": 0.333,
+      "en_gloss": "not",
+      "fr_gloss": "Nantes (city)",
+      "grail": false
+    },
+    {
+      "en": "tot",
+      "fr": "tante",
+      "confidence": 0.4228,
+      "meaning_sim": 0.2,
+      "en_gloss": "tot",
+      "fr_gloss": "aunt",
+      "grail": false
+    },
+    {
+      "en": "top",
+      "fr": "tempes",
+      "confidence": 0.4201,
+      "meaning_sim": 0.333,
+      "en_gloss": "top",
+      "fr_gloss": "temple (of head)",
+      "grail": false
+    },
+    {
+      "en": "paup",
+      "fr": "toque",
+      "confidence": 0.4024,
+      "meaning_sim": 0.143,
+      "en_gloss": "paup",
+      "fr_gloss": "chef's hat",
+      "grail": false
+    },
+    {
+      "en": "pet",
+      "fr": "tombe",
+      "confidence": 0.4024,
+      "meaning_sim": 0.333,
+      "en_gloss": "pet",
+      "fr_gloss": "tomb/grave",
+      "grail": false
+    },
+    {
+      "en": "net",
+      "fr": "net",
+      "confidence": 0.3927,
+      "meaning_sim": 1.0,
+      "en_gloss": "net",
+      "fr_gloss": "clean/clear",
+      "grail": false
+    },
+    {
+      "en": "bock",
+      "fr": "tontes",
+      "confidence": 0.3927,
+      "meaning_sim": 0.125,
+      "en_gloss": "bock",
+      "fr_gloss": "shearing",
+      "grail": false
+    },
+    {
+      "en": "tete",
+      "fr": "teinte",
+      "confidence": 0.3927,
+      "meaning_sim": 0.5,
+      "en_gloss": "tete",
+      "fr_gloss": "tint/shade",
+      "grail": false
+    }
+  ],
+  "grail_count": 0
+}

@@ -1,0 +1,26 @@
+en	fr	confidence	meaning_sim	grail	en_gloss	fr_gloss
+thuy	tout	1.0	0.4	0	thuy	all
+penn	tantes	0.9615	0.333	0	penn	aunt
+thuy	toux	0.8415	0.333	0	thuy	cough
+topp	tempes	0.6877	0.333	0	topp	temple (of head)
+besse	notes	0.6705	0.333	0	besse	note
+nett	net	0.6705	1.0	0	nett	clean/clear
+tet	teinte	0.6705	0.5	0	tet	tint/shade
+tet	teintes	0.6705	0.4	0	tet	tint/shade
+tien	tienne	0.6705	1.0	0	tien	yours
+knott	nantes	0.5861	0.286	0	knott	Nantes (city)
+paup	tombes	0.5392	0.0	0	paup	tomb/grave
+sette	tente	0.53	0.5	0	sette	tent
+topp	tempe	0.497	0.4	0	topp	temple (of head)
+taube	tombes	0.4746	0.375	0	taube	tomb/grave
+maw	nom	0.4639	0.2	0	maw	name
+ma	nom	0.4639	0.25	0	ma	name
+mah	mon	0.461	0.2	0	mah	mon
+not	nantes	0.4532	0.333	0	not	Nantes (city)
+tot	tante	0.4228	0.2	0	tot	aunt
+top	tempes	0.4201	0.333	0	top	temple (of head)
+paup	toque	0.4024	0.143	0	paup	chef's hat
+pet	tombe	0.4024	0.333	0	pet	tomb/grave
+net	net	0.3927	1.0	0	net	clean/clear
+bock	tontes	0.3927	0.125	0	bock	shearing
+tete	teinte	0.3927	0.5	0	tete	tint/shade

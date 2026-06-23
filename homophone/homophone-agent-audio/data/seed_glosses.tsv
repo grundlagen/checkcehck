@@ -1,0 +1,62 @@
+# Curated EN<TAB>FR<TAB>gloss seeds for the meaning layer.
+#
+# These are TRUE meaning equivalences (translations), NOT homophones. They
+# ground the MeaningOracle so chains can prove that *sense* — not only sound —
+# survived a homophone bridge.
+#
+# This batch is deliberately anchored on FRENCH words that actually occur as
+# `tgt` forms in pairbank.tsv (the EN `src` side is mostly phonetic fragments,
+# so glossing it grounds nothing — see NEXT_ROUTINE.md). Morphological families
+# (tinte/teinte, tante/tantes...) are included on purpose so the whittling loop
+# has same-meaning clusters to condense.
+# en	fr	gloss
+doggy	toutou	doggy
+doggies	toutous	doggy
+aunt	tante	aunt
+aunts	tantes	aunt
+tint	teinte	tint/shade
+tints	teintes	tint/shade
+shearing	tonte	shearing
+shearings	tontes	shearing
+tent	tente	tent
+tents	tentes	tent
+note	note	note
+notes	notes	note
+clean	net	clean/clear
+toque	toque	chef's hat
+tomb	tombe	tomb/grave
+tombs	tombes	tomb/grave
+temple	tempe	temple (of head)
+temples	tempes	temple (of head)
+suckle	tete	suckles
+yours	tienne	yours
+suckles	tete	suckles
+nantes	nantes	Nantes (city)
+time	temps	time
+name	nom	name
+sea	mer	sea
+mother	mere	mother
+late	tard	late
+head	tete	head
+aunt2	tata	auntie
+all	tout	all
+cough	toux	cough
+roof	toit	roof
+silent	tais	be silent
+cup	tasse	cup
+spot	tache	stain/spot
+task	tache	task
+size	taille	size
+waist	taille	waist
+cut	taille	cuts
+such	tel	such
+canvas	toile	canvas/cloth
+web	toile	web
+early	tot	early
+your	ton	your
+tone	ton	tone
+barrel	tonne	tonne/ton
+thunder	tonnerre	thunder
+turn	tour	turn/tower
+tower	tour	tower
+always	toujours	always
